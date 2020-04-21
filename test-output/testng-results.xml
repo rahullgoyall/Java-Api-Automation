@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" total="1" passed="1">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Default suite" duration-ms="4257" started-at="2020-04-21T11:49:36Z" finished-at="2020-04-21T11:49:41Z">
+    <groups>
+    </groups>
+    <test name="Default test" duration-ms="4257" started-at="2020-04-21T11:49:36Z" finished-at="2020-04-21T11:49:41Z">
+      <class name="testcases.api.TestGetRequest">
+        <test-method status="PASS" signature="getAllHeaders()[pri:0, instance:testcases.api.TestGetRequest@4cc0edeb]" name="getAllHeaders" duration-ms="4223" started-at="2020-04-21T17:19:36Z" finished-at="2020-04-21T17:19:41Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getAllHeaders -->
+      </class> <!-- testcases.api.TestGetRequest -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>

@@ -20,7 +20,7 @@ public class ExtendReportsBase {
 	@BeforeTest
 	public void startReport() {
 		System.out.println("ss");
-		htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "/test-output/STMExtentReport.html");
+		htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "/test-output/ExtentReport.html");
 		// Create an object of Extent Reports
 		htmlReporter.config().setDocumentTitle("Title of the Report Comes here "); 
 		// Name of the report

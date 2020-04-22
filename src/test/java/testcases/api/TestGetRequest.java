@@ -22,8 +22,9 @@ import apis.RestGetApi;
 import io.restassured.http.Header;
 import io.restassured.http.Headers;
 import io.restassured.response.Response;
-import utility.JsonUtils;
+
 import utility.ExtendReportsBase;
+import utility.JsonUtils;
 
 
 public class TestGetRequest extends ExtendReportsBase{

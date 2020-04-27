@@ -2,14 +2,9 @@ package testcases.api;
 
 import java.util.HashMap;
 
-import org.json.JSONObject;
-import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import apis.RestGetApi;
 import apis.RestPostApi;
 import io.restassured.response.Response;
-import utility.JsonUtils;
 
 public class TestPostRequest {
 	

@@ -4,25 +4,12 @@ import java.util.HashMap;
 
 import org.json.JSONObject;
 import org.testng.Assert;
-import org.testng.ITestResult;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import org.testng.xml.dom.DomUtil.NodeProcessor;
-
-import com.aventstack.extentreports.ExtentReports;
-import com.aventstack.extentreports.ExtentTest;
-import com.aventstack.extentreports.Status;
-import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
-import com.aventstack.extentreports.reporter.configuration.Theme;
-
 import apis.RestGetApi;
 import io.restassured.http.Header;
 import io.restassured.http.Headers;
 import io.restassured.response.Response;
-
 import utility.ExtendReportsBase;
 import utility.JsonUtils;
 
@@ -30,9 +17,10 @@ import utility.JsonUtils;
 public class TestGetRequest extends ExtendReportsBase{
 	
 
-	@Test
+	@Test(groups = {"demo"})
 	void getRequestWithoutHeader(){
-		logger = extent.createTest("Get request test") ;
+		System.out.println("1");
+		logger.set(extent.createTest("getRequestWithoutHeader"));
 		Response response = RestGetApi.getRequestWithOutHeader("https://reqres.in/api", "/users?page=2");
 		String responseBody = response.getBody().asString();
 		JSONObject responseJson = new JSONObject(responseBody);
@@ -43,9 +31,10 @@ public class TestGetRequest extends ExtendReportsBase{
 	}
 
 
-	@Test
+	@Test(groups = {"demo"})
 	void getRequestWithHeader(){
-		logger = extent.createTest("Get request test 3") ;
+		System.out.println("2");
+		logger.set(extent.createTest("getRequestWithHeader"));
 		HashMap<String, String> headers = new HashMap<String, String>();
 		headers.put("Content-Type", "application/json");
 
@@ -56,8 +45,9 @@ public class TestGetRequest extends ExtendReportsBase{
 	}
 
 
-	//@Test
-	void validateResponseHeaders(){
+	@Test(dataProvider="testdata")
+	void validateResponseHeaders(String var1, String var2){
+		logger.set(extent.createTest("validateResponseHeaders"));
 		//headers
 		HashMap<String, String> headers = new HashMap<String, String>();
 		headers.put("Content-Type", "application/json");
@@ -69,11 +59,13 @@ public class TestGetRequest extends ExtendReportsBase{
 		String Connection	= response.header("Connection");
 		System.out.println("Connection:"+Connection);
 		System.out.println("Content type:"+ContentType);
+		System.out.println(var1+var2);
 	}
 
 
-	//@Test
+	@Test
 	void getAllHeaders(){
+		logger.set(extent.createTest("getAllHeaders"));
 		//headers
 		HashMap<String, String> headers = new HashMap<String, String>();
 		headers.put("Content-Type", "application/json");
@@ -89,6 +81,10 @@ public class TestGetRequest extends ExtendReportsBase{
 
 	}
 	
+	@DataProvider(name="testdata")
+	public static Object[][] dataInfo(){
+		return new Object[][] {{"hello","hello"},{"bye","bye"}};
+	}	
 
 
 }

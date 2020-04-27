@@ -1,5 +1,6 @@
 package utility;
 
+import org.testng.IInvokedMethod;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
@@ -15,12 +16,13 @@ public class ExtendReportsBase {
 	
 	public ExtentHtmlReporter htmlReporter;
 	public ExtentReports extent;
-	public ExtentTest logger;
+	public static ThreadLocal<ExtentTest> logger = new ThreadLocal<ExtentTest>();
+	//public ExtentTest logger;
 
-	@BeforeTest
+	@BeforeTest(alwaysRun=true)
 	public void startReport() {
 		System.out.println("ss");
-		htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "/test-output/ExtentReport.html");
+		htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "/extentReports/ExtentReport.html");
 		// Create an object of Extent Reports
 		htmlReporter.config().setDocumentTitle("Title of the Report Comes here "); 
 		// Name of the report
@@ -37,24 +39,24 @@ public class ExtendReportsBase {
 
 	}
 	
-	@AfterMethod
+	@AfterMethod(alwaysRun=true)
 	public void tearDown(ITestResult result){
 		if(result.getStatus() == ITestResult.FAILURE){
-			logger.log(Status.FAIL, "Test Case failed is:"+result.getMethod());
-			logger.log(Status.FAIL, "Test Case failed is:"+result.getThrowable());
+			logger.get().log(Status.FAIL, "Test Case failed is:"+result.getMethod());
+			logger.get().log(Status.FAIL, "Test Case failed is:"+result.getThrowable());
 
 			
 		}else if(result.getStatus() == ITestResult.SKIP){
-			logger.log(Status.SKIP, "Test Case skipped is:"+result.getMethod());
+			logger.get().log(Status.SKIP, "Test Case skipped is:"+result.getMethod());
 			
 		}else if(result.getStatus() == ITestResult.SUCCESS){
-			logger.log(Status.PASS, "Test Case passed is:"+result.getMethod());
+			logger.get().log(Status.PASS, "Test Case passed is:"+result.getMethod());
 			
 		}
 		
 	}
 
-	@AfterTest
+	@AfterTest(alwaysRun=true)
 	public void endReport() {
 		extent.flush();
 	}

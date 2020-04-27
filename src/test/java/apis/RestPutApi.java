@@ -10,10 +10,9 @@ import io.restassured.http.Method;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
-public class RestPostApi {
-
-	@SuppressWarnings("unchecked")
-	public static Response postRequestWithHeader(String uri, String pathParameter,HashMap<String, String> json,HashMap<String, String> header){
+public class RestPutApi {
+	
+	public static Response putRequestWithHeader(String uri, String pathParameter,HashMap<String, String> json,HashMap<String, String> header){
 		RestAssured.baseURI = uri;
 		RequestSpecification httpRequest = RestAssured.given();
 
@@ -31,8 +30,9 @@ public class RestPostApi {
 			httpRequest.header(entry.getKey(),entry.getValue());
 		}
 
-		Response response = httpRequest.request(Method.POST,pathParameter);
+		Response response = httpRequest.request(Method.PUT,pathParameter);
 		return response;
 
 	}
+
 }
